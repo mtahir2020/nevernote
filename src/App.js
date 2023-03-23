@@ -41,6 +41,15 @@ function App() {
     })
   }
 
+  // Need to replace here and not ADD the information
+
+  const onModification = (mod) => {
+    console.log(mod);
+    setUserInfo((oldInfo) => {
+      return [...oldInfo, { name: mod.title, age: mod.body}]
+    })
+  }
+
   return (
     <div className='main'>
       <Header />
@@ -49,7 +58,7 @@ function App() {
         <UserBox finalUserInfo={finalUserInfo}/>
       </div>
       <div className={styles['card-container']}>
-        <UserCard userData={userInfo} filteredUsers={filteredUsers} onRemovePerson={removePerson}/>
+        <UserCard userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
       </div>
     </div>
   );
