@@ -6,8 +6,10 @@ import Wrapper from './Helpers/Wrapper'
 
 const Form = (props) => {
 
-  const nameInputRef = useRef()
-  const ageInputRef = useRef()
+  const [openForm, setOpenForm] = useState(false);
+
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const [userInfo, setUserInfo] = useState({
     id: '',
@@ -61,14 +63,9 @@ const Form = (props) => {
       return
     }
 
-    // console.log(props.userInfo);
-    // console.log('newuser :' + props.userInfo)
-
     let userInfoLength = props.userInfo.length
-    console.log(userInfoLength);
 
     props.userInfo({
-      // id: +(userInfo.length + 1),
       id: userInfoLength,
       name: userInfo.name,
       age: +userInfo.age
@@ -87,20 +84,30 @@ const Form = (props) => {
     setError(null)
   }
 
+  const showForm = (e) => {
+    console.log(e.currentTarget);
+    setOpenForm((oldOpenForm) => {
+      return !oldOpenForm
+    })
+  }
+
   // To make controlled component, add 'value' to input field and equal it to state
 
   return (
     <Wrapper>
       {error && <ErrorModal onConfirm={errorHandler} title={error.title} message={error.message}/>}
-      <form onSubmit={captureInfo}>
-      <div><h2>Add a user</h2></div>
-        <label htmlFor='name'>Name</label>
-        <input id="name" ref={nameInputRef} value={userInfo.name} type="text" className='input' onChange={addName}></input>
-        <label htmlFor='age'>Age (Years)</label>
-        <input id="age" ref={ageInputRef} value={userInfo.age} type="number" className='input' onChange={addAge}></input>
-        {/* <button type="submit">Add User</button> */}
-        <Button type="submit">Add User</Button>
-      </form>
+      <div className='add-details-container'>
+        {openForm && <form onSubmit={captureInfo}>
+          <div><h2>Add a user</h2></div>
+          <label htmlFor='name'>Name</label>
+          <input id="name" ref={nameInputRef} value={userInfo.name} type="text" onChange={addName}></input>
+          <label htmlFor='age'>Age (Years)</label>
+          <input id="age" ref={ageInputRef} value={userInfo.age} type="number" onChange={addAge}></input>
+          <Button type="submit">Add User</Button>
+        </form>}
+        <div onClick={showForm}>{!openForm && /*<span className="material-symbols-outlined">note_add</span>}*/ 'Add note'}</div>
+        {openForm && <div onClick={showForm}>Hide Note</div>}
+      </div>
     </Wrapper>
   )
 }
