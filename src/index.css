@@ -23,6 +23,7 @@ form input {
   height: 100vh;
   flex-direction: column;
   margin: auto;
+  width: 100%;
   /* border: 1px solid white; */
 }
 
@@ -30,4 +31,12 @@ form input {
   /* border: 1px solid green; */
   width: 100%;
   display: flex;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
 }
