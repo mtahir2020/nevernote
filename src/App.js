@@ -9,10 +9,10 @@ function App() {
 
   const [userInfo, setUserInfo] = useState(
     [
-      {name: 'Jeff', age: 32},
-      {name: 'Hank', age: 16},
-      {name: 'Mahatma', age: 54},
-      {name: 'Mahandas', age: 41}
+      {id: 1, name: 'Jeff', age: 32},
+      {id: 2, name: 'Hank', age: 16},
+      {id: 3, name: 'Mahatma', age: 54},
+      {id: 4, name: 'Mahandas', age: 41}
     ]
   )
 
@@ -25,28 +25,42 @@ function App() {
 
 
   const finalUserInfo = (info) => {
+    // const usersLength = userInfo.length;
+    console.log(userInfo[userInfo.length - 1].id + 1);
     setUserInfo((oldUserInfo) => {
-      return [...oldUserInfo, info]
+      return [...oldUserInfo,
+              { id: userInfo[userInfo.length - 1].id + 1,
+                name: info.name,
+                age: info.age
+              }
+            ]
     })
   }
+  console.log(userInfo);
 
   const removePerson = (user) => {
+    // why is user that is passed up rendering with a completely different ID?
     // console.log(user);
     // console.log(filteredUsers);
     setUserInfo((oldFilteredUsers) => {
       const updatedUsers = oldFilteredUsers.filter((person) => {
-        return person.age !== user.age && person.name !== user.name
+        return person.id !== user.id
+        // return person.age !== user.age && person.name !== user.name
       })
       return updatedUsers
     })
   }
 
-  // Need to replace here and not ADD the information
+  // Need to replace here and not ADD the information ???????
 
   const onModification = (mod) => {
-    console.log(mod);
-    setUserInfo((oldInfo) => {
-      return [...oldInfo, { name: mod.title, age: mod.body}]
+    // console.log(mod);
+
+    setUserInfo((oldUserInfo) => {
+      const updatedInfo = oldUserInfo.map((oldItem) => {
+        return oldItem.id === mod.id ? {...oldItem, name: mod.title, age: mod.body} : oldItem
+      })
+      return updatedInfo
     })
   }
 

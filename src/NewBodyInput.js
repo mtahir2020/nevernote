@@ -3,19 +3,22 @@ import styles from './User.module.css'
 
 const NewBodyInput = (props) => {
 
+  // may have to remove this ID
   const [updatedNotes, setUpdatedNotes] = React.useState({
-    title: '', body: ''
+    id:'', title: '', body: ''
   })
+
 
   // console.log(updatedNotes);
 
   const onModify = (e) => {
-    // console.log(e.target.name);
+    // console.log(e.target);
     // console.log(e.target.value);
     // const input = e.currentTarget.value;
     setUpdatedNotes((oldNotes) => {
       return {
         ...oldNotes,
+        id: props.id,
         [e.target.name]: e.target.value
       }
     })
@@ -23,6 +26,7 @@ const NewBodyInput = (props) => {
 
   const addModdedData = (e) => {
     e.preventDefault()
+
     props.onModData(updatedNotes)
   }
 
@@ -33,7 +37,7 @@ const NewBodyInput = (props) => {
         <label>Update title</label>
         <input type="text" name="title" onChange={onModify}></input>
         <label>Update content</label>
-        <input type="text" name="body" onChange={onModify}></input>
+        <input type="number" name="body" onChange={onModify}></input>
         <div>
           <button type='submit'>Update Note</button>
           <button>Cancel</button>
