@@ -32,14 +32,6 @@
   padding-left: 6px;
 }
 
-.name-container .name {
-  /* height: 50%; */
-}
-
-.name-container .remove {
-  /* height: 50%; */
-}
-
 .body {
   width: 75%;
   /* border-bottom: 1px green solid; */
@@ -48,6 +40,8 @@
   padding-left: 10px;
 }
 
-/* .remove {
-  width: 50%;
-} */
+.body-modify-input {
+  width: 100%;
+  min-height: 120px;
+  margin: auto;
+}

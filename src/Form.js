@@ -10,6 +10,7 @@ const Form = (props) => {
   const ageInputRef = useRef()
 
   const [userInfo, setUserInfo] = useState({
+    id: '',
     name: '',
     age: ''
   })
@@ -39,7 +40,7 @@ const Form = (props) => {
 
   const captureInfo = (e) => {
     e.preventDefault()
-    console.log(nameInputRef.current.value);
+    // console.log(nameInputRef.current.value);
 
     if (userInfo.name.trim().length < 1 || userInfo.age.trim().length < 1) {
       // console.log('nothing entered');
@@ -60,12 +61,22 @@ const Form = (props) => {
       return
     }
 
+    // console.log(props.userInfo);
+    // console.log('newuser :' + props.userInfo)
+
+    let userInfoLength = props.userInfo.length
+    console.log(userInfoLength);
+
     props.userInfo({
+      // id: +(userInfo.length + 1),
+      id: userInfoLength,
       name: userInfo.name,
-      age: userInfo.age
+      age: +userInfo.age
     })
+
     setUserInfo(() => {
       return {
+        id: '',
         name: '',
         age: ''
       }

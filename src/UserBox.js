@@ -7,6 +7,7 @@ const UserBox = ( { finalUserInfo}) => {
   const userInfo = (info) => {
     // console.log(info);
     finalUserInfo({
+      id: info.id,
       name: info.name,
       age: info.age
     })
