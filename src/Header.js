@@ -11,7 +11,7 @@ const Header = ({setQuery, query}) => {
   return (
     <div className='header'>
       <h1>
-        SimpleNote
+        (N)everNote
       </h1>
       <SearchBar query={query} setQuery={onQuery}/>
     </div>

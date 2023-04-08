@@ -5,20 +5,23 @@ import './MainNote.css'
 const MainNote = ({ selectedNote, userData, resetMemo, onModification, finalUserInfo }) => {
 
   const [note, setNote] = useState({id: '', title: '', body: ''})
+  const [modifiable, setModifiable] = useState(false)
 
   // when selectedNote changes (held in App.js), if selectedNote exists, make that the 'note' held in state
   useEffect(() => {
     if (selectedNote) setNote(selectedNote)
   }, [selectedNote])
 
+  // useEffect(() => {
+  //   setModifiable(true)
+  // }, [note])
+
   const mainNoteChange = (e) => {
+    setModifiable(true)
     let newInput = e.target.value;
     // setTimeout(() => {
     //   console.log('500 ms down');
     // }, 500)
-
-    // when users types in a note, set state of 'note' with new input
-    // is the error here?
 
     setNote((oldNote) => {
       return {...oldNote, body: newInput }
@@ -27,10 +30,9 @@ const MainNote = ({ selectedNote, userData, resetMemo, onModification, finalUser
 
 //  on saving, if selectedNote exists, modify 'note', otherwise create it
   const onSave = () => {
+    setModifiable(false)
     selectedNote ? onModification(note, note.body) : finalUserInfo(note)
     wipeNote()
-    // setNote({id: '', title: '', body: ''})
-    // resetMemo({id: '', title: '', body: ''})
   }
 
   const wipeNote = () => {
@@ -39,12 +41,21 @@ const MainNote = ({ selectedNote, userData, resetMemo, onModification, finalUser
     resetMemo({id: '', title: '', body: ''})
   }
 
+  const UpdateButton = () => {
+    return (
+      <button type='button' onClick={onSave}>Update</button>
+    )
+  }
+
   return (
     <div className='main-note-area'>
-      {/* {console.log(userData)} */}
       <button type='button' onClick={wipeNote}>Create new</button>
-      <button type='button' onClick={onSave}>{selectedNote ? 'Update' : 'Create'}</button>
-      <textarea className='textarea-note' onChange={mainNoteChange} placeholder="Type your note here.." value={note.body}></textarea>
+      {(modifiable && selectedNote) && <UpdateButton />}
+      {!selectedNote && <button type='button' onClick={onSave}>Create</button>}
+
+      {/* <button type='button' onClick={onSave}>{selectedNote ? 'Update' : 'Create'}</button> */}
+      <textarea className='textarea-note' onChange={mainNoteChange}
+      placeholder="Title goes here...&#10;Type your note here.." value={note.body}></textarea>
     </div>
   )
 }
