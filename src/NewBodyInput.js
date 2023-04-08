@@ -8,7 +8,6 @@ const NewBodyInput = (props) => {
     id:'', title: '', body: ''
   })
 
-
   // console.log(updatedNotes);
 
   const onModify = (e) => {
@@ -26,7 +25,6 @@ const NewBodyInput = (props) => {
 
   const addModdedData = (e) => {
     e.preventDefault()
-
     props.onModData(updatedNotes)
   }
 

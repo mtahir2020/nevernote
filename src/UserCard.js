@@ -6,7 +6,7 @@ import styles from './User.module.css'
 const UserCard = ({ onRemovePerson, onModification, filteredUsers}) => {
 
   const onHandleClick = (user) => {
-    console.log(user);
+    // console.log(user);
     onRemovePerson(user)
   }
 
@@ -15,17 +15,12 @@ const UserCard = ({ onRemovePerson, onModification, filteredUsers}) => {
     onModification(mod)
   }
 
-  // QUESTIONABLE
-  // console.log(filteredUsers.length);
-  // let filteredUserLength = filteredUsers.length + 1
-
   const filteredUserInfo = filteredUsers.map((user, index) => {
-    // console.log(user.name + ': ' + user.age + ' (in UserCard)');
-    return <User key={`${Math.floor(Math.random() * user.age)}${user.name[0]}${Math.floor(Math.random() * user.age)}`}
+    return <User key={`${Math.floor(Math.random() * user.body)}${user.title[0]}${Math.floor(Math.random() * user.body)}`}
                 id={user.id}
                 // id={filteredUserLength}
-                name={user.name}
-                age={user.age}
+                title={user.title}
+                body={user.body}
                 onHandleClick={onHandleClick}
                 handleModify={moddedData}
                 // listOfUsers={filteredUserInfo}
@@ -36,6 +31,7 @@ const UserCard = ({ onRemovePerson, onModification, filteredUsers}) => {
   return (
     <Wrapper className={styles['card-container']}>
       {filteredUserInfo}
+      {/* <div>Big text</div> */}
     </Wrapper>
   )
 }
