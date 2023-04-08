@@ -2,14 +2,40 @@
   /* margin: auto; */
   display: flex;
   /* justify-content: center; */
-  flex-direction: column;
-  align-items: center;
+  /* flex-direction: column; */
+  /* align-items: center; */
   justify-content: center;
   width: 100%;
-  margin-top: 20px;
+  height: 100vh;
+  /* margin-top: 20px; */
   background-color: rgba(211, 211, 211, 0.436);
-  padding: 10px 0;
+  /* padding: 10px 0; */
 }
+
+.notes-main-screen {
+  display: flex;
+  width: 75%;
+}
+
+.titles-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  background-color: bisque;
+  width: 25%;
+}
+
+
+.titles-container {
+  background-color: pink;
+  /* color: black; */
+  width: 98%;
+  min-height: 120px;
+  display: flex;
+  margin: 10px 0;
+}
+
+
 
 .note-container {
   background-color: white;
