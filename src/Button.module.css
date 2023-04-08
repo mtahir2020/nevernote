@@ -1,7 +1,7 @@
 button {
   font: inherit;
   border: 1px solid black;
-  background: #55be8f;
+  background: #01A82E;
   color: white;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -11,7 +11,7 @@ button {
 
 button:hover,
 button:active {
-  background: #398161;
+  background: #137b31;
   border-color: #14463f;
 }
 

@@ -1,11 +1,19 @@
 import React from 'react'
+import './Header.css'
+import SearchBar from './SearchBar';
 
-const Header = () => {
+const Header = ({setQuery, query}) => {
+
+  const onQuery = (quer) => {
+    setQuery(quer)
+  }
+
   return (
-    <div>
-      <h1 style={{color: "#55be8f"}}>
-        Users App
+    <div className='header'>
+      <h1>
+        SimpleNote
       </h1>
+      <SearchBar query={query} setQuery={onQuery}/>
     </div>
   )
 }

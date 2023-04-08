@@ -8,33 +8,33 @@ const Form = (props) => {
 
   const [openForm, setOpenForm] = useState(false);
 
-  const nameInputRef = useRef();
-  const ageInputRef = useRef();
+  // const nameInputRef = useRef();
+  // const ageInputRef = useRef();
 
   const [userInfo, setUserInfo] = useState({
     id: '',
-    name: '',
-    age: ''
+    title: '',
+    body: ''
   })
 
   const [error, setError] = useState()
 
-  const addName = (e) => {
+  const addTitle = (e) => {
     // e.preventDefault();
     setUserInfo((oldUserInfo) => {
       return {
         ...oldUserInfo,
-        name: e.target.value
+        title: e.target.value
       }
     })
   }
 
-  const addAge = (e) => {
+  const addBody = (e) => {
 
     setUserInfo((oldUserInfo) => {
       return {
         ...oldUserInfo,
-        age: e.target.value
+        body: e.target.value
       }
     })
   }
@@ -44,7 +44,7 @@ const Form = (props) => {
     e.preventDefault()
     // console.log(nameInputRef.current.value);
 
-    if (userInfo.name.trim().length < 1 || userInfo.age.trim().length < 1) {
+    if (userInfo.title.trim().length < 1 || userInfo.body.trim().length < 1) {
       // console.log('nothing entered');
       setError({
         title: "Nothing entered",
@@ -53,29 +53,19 @@ const Form = (props) => {
       return
     }
 
-    // adding '+' in front of variable turns it into number
-    if (+userInfo.age < 0) {
-      // console.log('age must be 0 or over');
-      setError({
-        title: "Age invalid",
-        message: "Must be greater than 0"
-      })
-      return
-    }
-
     let userInfoLength = props.userInfo.length
 
     props.userInfo({
       id: userInfoLength,
-      name: userInfo.name,
-      age: +userInfo.age
+      title: userInfo.title,
+      body: userInfo.body
     })
 
     setUserInfo(() => {
       return {
         id: '',
-        name: '',
-        age: ''
+        title: '',
+        body: ''
       }
     })
   }
@@ -85,7 +75,7 @@ const Form = (props) => {
   }
 
   const showForm = (e) => {
-    console.log(e.currentTarget);
+    // console.log(e.currentTarget);
     setOpenForm((oldOpenForm) => {
       return !oldOpenForm
     })
@@ -97,16 +87,17 @@ const Form = (props) => {
     <Wrapper>
       {error && <ErrorModal onConfirm={errorHandler} title={error.title} message={error.message}/>}
       <div className='add-details-container'>
-        {openForm && <form onSubmit={captureInfo}>
-          <div><h2>Add a user</h2></div>
-          <label htmlFor='name'>Name</label>
-          <input id="name" ref={nameInputRef} value={userInfo.name} type="text" onChange={addName}></input>
-          <label htmlFor='age'>Age (Years)</label>
-          <input id="age" ref={ageInputRef} value={userInfo.age} type="number" onChange={addAge}></input>
-          <Button type="submit">Add User</Button>
-        </form>}
-        <div onClick={showForm}>{!openForm && /*<span className="material-symbols-outlined">note_add</span>}*/ 'Add note'}</div>
-        {openForm && <div onClick={showForm}>Hide Note</div>}
+        {openForm && <div className='form'>
+          {/* <div><h2>Add a user</h2></div> */}
+          <form onSubmit={captureInfo}>
+            {/* <label htmlFor='name'>Name</label> */}
+            <input id="title" /*ref={nameInputRef}*/ /*rows="5" cols="40"*/ placeholder="Title here" value={userInfo.title} type="text" onChange={addTitle}></input>
+            {/* <label htmlFor='age'>Age (Years)</label> */}
+            <textarea id="body" /*ref={ageInputRef}*/ placeholder="Note here" value={userInfo.body} type="textarea" onChange={addBody}></textarea>
+            <Button type="submit">Add User</Button>
+          </form>
+        </div>}
+        <div onClick={showForm}>{!openForm && '+ Note'}</div>
       </div>
     </Wrapper>
   )

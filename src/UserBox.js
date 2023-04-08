@@ -8,8 +8,8 @@ const UserBox = ( { finalUserInfo}) => {
     // console.log(info);
     finalUserInfo({
       id: info.id,
-      name: info.name,
-      age: info.age
+      title: info.title,
+      body: info.body
     })
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './SearchBar.css'
 
 const SearchBar = ({ query, setQuery }) => {
@@ -11,8 +11,7 @@ const SearchBar = ({ query, setQuery }) => {
 
   return (
     <div className='search-container'>
-      <label htmlFor='search'><b>Search Users</b></label>
-      <input id='search' className="input" value={query} type="text" onChange={filterBySearch}/>
+      <input id='search' className="input" placeholder="Search note here" value={query} type="text" onChange={filterBySearch}/>
     </div>
   )
 }
