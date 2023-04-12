@@ -1,36 +1,19 @@
 import React, { useMemo, useState, useEffect } from 'react';
-// import UserBox from './UserBox';
 import styles from './User.module.css'
 import TitlesList from './TitlesList';
 import Header from './Header'
 import MainNote from './MainNote';
+import EmptyNotes from './EmptyNotes'
+
 
 function App() {
 
   const [userInfo, setUserInfo] = useState(
-    () => JSON.parse(localStorage.getItem('notes')) ||
-    [
-      {id: 4, title: 'Go to gym', body: 'do legs workout'},
-      {id: 3, title: 'Holiday', body: 'withdraw holiday money'},
-      {id: 2, title: 'Study React', body: 'do udemy course'},
-      {id: 1, title: 'create portfolio', body: 'add all projects to portfolio'}
-    ]
+    () => JSON.parse(localStorage.getItem('notes'))
   )
 
   const [query, setQuery] = useState('')
   const [selectedNoteId, setSelectedNoteId] = useState()
-
-  // useEffect?????
-  // const reOrderList = () => {
-  //   let currentNoteId = selectedNoteId
-  //   // then listen to a click event (or useEffect) and..
-  //   let newNoteId = selectedNoteId
-  //   // userInfo set
-  //   // dip into localStorage and replace each value individually
-
-  // }
-
-  console.log(userInfo);
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(userInfo))
@@ -43,11 +26,11 @@ function App() {
 
   // When adding a new item to top of the list, the id will break if if it's trying to take the last item from the array
   const finalUserInfo = (info) => {
+    // console.log(info.body.split('\n')[0].substring(0, 20))
     setUserInfo((oldUserInfo) => {
       return [
-        //...oldUserInfo,
         {
-          id: userInfo.length > 0 ? userInfo[0].id + 1 : 1,
+          id: userInfo.length > 0 ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
           title: info.body.split('\n')[0],
           body: info.body
         },
@@ -57,17 +40,18 @@ function App() {
   }
 
   const removePerson = (user) => {
-    // console.log(user);
+    console.log(user);
     setUserInfo((oldFilteredUsers) => {
       const updatedUsers = oldFilteredUsers.filter((person) => {
         return person.id !== user.id
       })
       return updatedUsers
     })
+    setSelectedNoteId(undefined)
   }
+  // console.log(selectedNoteId);
 
   const onModification = (mod, newInput) => {
-
     // Updating the notes list so a freshly modified note goes to the top of the list
     // If the id doesn't match, it simply gets pushed to the end part of the array
     setUserInfo((oldNotes) => {
@@ -89,36 +73,34 @@ function App() {
     setSelectedNoteId(note.id)
   }
 
-  const resetMemo = (toReset) => {
+  const resetMemo = () => {
     // console.log(toReset);
-    setSelectedNoteId(toReset.id)
+    setSelectedNoteId()
   }
 
 
+  // when selectedNoteId changes, it matches that id with the right note from userInfo
 // to find the object with the note id
   const noteToDisplay = useMemo(() => {
     return userInfo.find((oneNote) => {
       return selectedNoteId === oneNote.id
     })
-  }, [selectedNoteId, userInfo])
+  }, [selectedNoteId, userInfo]/*, userInfo]*/)
+
+
 
   return (
     <div className='main'>
-      {/* {console.log(userInfo)} */}
       <Header query={query} setQuery={setQuery}/>
-      {/* <div className='search-add-container'>
-        <UserBox finalUserInfo={finalUserInfo}/>
-      </div> */}
       <div className={styles['card-container']}>
-        <TitlesList /*reOrder={reOrder}*/ noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
+        { userInfo.length < 1 ? <EmptyNotes /> :
+        <TitlesList resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
+        }
         <MainNote resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
-      </div>
+        {/* <button type='button' onClick={resetMemo}>Reset</button> */}
+     </div>
     </div>
   );
 }
 
 export default App;
-
-// when a note is open, have that selectednoteID
-// make an 'oldnote' and 'newnoteid' variable
-// when a new note is clicked, let it swap the id's

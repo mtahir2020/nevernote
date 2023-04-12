@@ -1,0 +1,9 @@
+.title:hover {
+  background-color: #48BC6C;
+  color: white;
+}
+
+.active-note {
+  border: 2px solid #ECECEC;
+  background-color: pink;
+}

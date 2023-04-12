@@ -2,27 +2,23 @@ import React, { useState, useEffect } from 'react'
 import './MainNote.css'
 
 
-const MainNote = ({ selectedNote, userData, resetMemo, onModification, finalUserInfo }) => {
+const MainNote = ({ selectedNote, resetMemo, onModification, finalUserInfo }) => {
 
   const [note, setNote] = useState({id: '', title: '', body: ''})
   const [modifiable, setModifiable] = useState(false)
 
   // when selectedNote changes (held in App.js), if selectedNote exists, make that the 'note' held in state
   useEffect(() => {
-    if (selectedNote) setNote(selectedNote)
+    if (selectedNote !== undefined) {
+      setNote(selectedNote)
+    } else {
+      setNote({id: '', title: '', body: ''})
+    }
   }, [selectedNote])
-
-  // useEffect(() => {
-  //   setModifiable(true)
-  // }, [note])
 
   const mainNoteChange = (e) => {
     setModifiable(true)
     let newInput = e.target.value;
-    // setTimeout(() => {
-    //   console.log('500 ms down');
-    // }, 500)
-
     setNote((oldNote) => {
       return {...oldNote, body: newInput }
     })
@@ -30,15 +26,14 @@ const MainNote = ({ selectedNote, userData, resetMemo, onModification, finalUser
 
 //  on saving, if selectedNote exists, modify 'note', otherwise create it
   const onSave = () => {
-    setModifiable(false)
     selectedNote ? onModification(note, note.body) : finalUserInfo(note)
     wipeNote()
   }
 
   const wipeNote = () => {
-    // console.log('state wiped');
     setNote({id: '', title: '', body: ''})
-    resetMemo({id: '', title: '', body: ''})
+    resetMemo()
+    setModifiable(false)
   }
 
   const UpdateButton = () => {
@@ -49,11 +44,11 @@ const MainNote = ({ selectedNote, userData, resetMemo, onModification, finalUser
 
   return (
     <div className='main-note-area'>
-      <button type='button' onClick={wipeNote}>Create new</button>
-      {(modifiable && selectedNote) && <UpdateButton />}
-      {!selectedNote && <button type='button' onClick={onSave}>Create</button>}
-
-      {/* <button type='button' onClick={onSave}>{selectedNote ? 'Update' : 'Create'}</button> */}
+      <div style={{display: 'flex', width: '100%'}}>
+        {!modifiable && <button type='button' onClick={wipeNote}>Create new note</button>}
+        {(modifiable && selectedNote) && <UpdateButton />}
+        {!selectedNote && <button type='button' onClick={onSave}>Save note</button>}
+      </div>
       <textarea className='textarea-note' onChange={mainNoteChange}
       placeholder="Title goes here...&#10;Type your note here.." value={note.body}></textarea>
     </div>
@@ -61,7 +56,3 @@ const MainNote = ({ selectedNote, userData, resetMemo, onModification, finalUser
 }
 
 export default MainNote
-
-// if you open, modify, or save a note, it goes to the top of the list
-// save already works
-// open a note, get the object, and set it's id to the last one, but then another has to change?

@@ -11,7 +11,7 @@ const SearchBar = ({ query, setQuery }) => {
 
   return (
     <div className='search-container'>
-      <input id='search' className="input" placeholder="Search note here" value={query} type="text" onChange={filterBySearch}/>
+      <input id='search' className="input" placeholder="Search title here" value={query} type="text" onChange={filterBySearch}/>
     </div>
   )
 }

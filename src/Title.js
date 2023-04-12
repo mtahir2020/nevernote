@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from './Button'
 import classes from './Button.module.css'
+import './TitleList.css'
+import './Title.css'
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-
-const Title = ({ /*toReorder*/ onNoteClick, onHandleClick, id, title, body }) => {
-
-  // const [modifiable, setModifiable] = useState(false)
+const Title = ({ onNoteClick, onHandleClick, id, title, body }) => {
 
   const removeUser = (e) => {
     // console.log(e.currentTarget);
@@ -14,15 +15,10 @@ const Title = ({ /*toReorder*/ onNoteClick, onHandleClick, id, title, body }) =>
       title: title,
       body: body
     })
+    // resetMemo()
   }
 
-  // const toggleModify = () => {
-  //   setModifiable((oldModifiable) => {
-  //     return !oldModifiable
-  //   })
-  // }
-
-  const getNoteDetails = () => {
+  const getNoteDetails = (e) => {
     onNoteClick({
       id: id,
       title: title,
@@ -30,19 +26,16 @@ const Title = ({ /*toReorder*/ onNoteClick, onHandleClick, id, title, body }) =>
     })
   }
 
-  // const reOrderList = (id) => {
-  //   toReorder(id)
-  // }
 
   return (
-    <div /*onClick={() => { return getNoteDetails(); reOrderList()}}*/ onClick={getNoteDetails}>
-      <div style={{display: 'flex', justifyContent: 'center', width: '100%', flexDirection: 'column', borderBottom: '2px solid black'}}>
-        {<p style={{margin: 'auto'}}>{title}</p>}
-        {<Button onClick={removeUser} className={classes.remove}>Remove</Button>}
-        {/* {<p style={{margin: 'auto'}} onClick={toggleModify}>Modify</p>} */}
+    <div style={ {height: 90, borderBottom: '1px solid #ECECEC'} } className={`title`} onClick={getNoteDetails}>
+      <div style={{display: 'flex', height: '60%', padding: '8px 4px', width: '100%'}}>
+        {<p style={{fontWeight: 600, padding: '0 8px', margin: 'unset'}}>{title}</p>}
+        {/* {<Button onClick={removeUser} className={classes.remove}>Remove</Button>} */}
       </div>
-      {/* <div className={styles.body}>{modifiable && <NewBodyInput id={id} onModData={onModData}/>}</div> */}
-      {/* <div>{age}</div> */}
+      <div className="note-actions" style={{display: 'flex', height: '40%', justifyContent: 'flex-start', alignItems: 'center'}}>
+        <FontAwesomeIcon className="note-action" onClick={removeUser} icon={icon({name: 'trash'})} />
+      </div>
     </div>
   )
 }

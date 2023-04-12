@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Title from './Title.js'
 
-const TitlesList = ({ reOrder, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
+const TitlesList = ({ selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
+
+
 
   const onHandleClick = (user) => {
     // console.log(user);
@@ -18,47 +20,23 @@ const TitlesList = ({ reOrder, onRemovePerson, onModification, noteClicked, filt
     noteClicked(user)
   }
 
-  const toReorder = (id) => {
-    reOrder(id)
-  }
-
   const filteredUserInfo = filteredUsers.map((user) => {
-    const bodyLength = user.body.split(' ')[0].length;
-    const titleChar = user.title[0];
-    const bodyChar = user.body[0]
-    const uniqueKey = `${Math.floor(Math.random() * bodyLength)}${titleChar || bodyChar}${Math.floor(Math.random() * bodyLength)}${bodyChar}${bodyLength}`
     return <Title
-                key={uniqueKey}
+                key={user.id}
                 id={user.id}
                 title={user.title}
                 onHandleClick={onHandleClick}
                 handleModify={moddedData}
                 onNoteClick={onNoteClick}
-                // listOfUsers={filteredUserInfo}
+                selectedNoteId={selectedNoteId}
           />
   })
 
 
-  // const filteredUserInfo = filteredUsers.map((user) => {
-  //   const bodyLength = user.body.split(' ')[0].length;
-  //   const titleChar = user.title[0];
-  //   const bodyChar = user.body[0]
-  //   const uniqueKey = `${Math.floor(Math.random() * bodyLength)}${titleChar || bodyChar}${Math.floor(Math.random() * bodyLength)}${bodyChar}${bodyLength}`
-  //   return <Title
-  //               key={uniqueKey}
-  //               id={user.id}
-  //               title={user.title}
-  //               onHandleClick={onHandleClick}
-  //               handleModify={moddedData}
-  //               onNoteClick={onNoteClick}
-  //               toReorder={toReorder}
-  //               // listOfUsers={filteredUserInfo}
-  //         />
-  // })
-
   return (
-    <div style={{display: 'flex', flexDirection: 'column', width: '25%', borderRight: '2px solid black'}}>
-      {filteredUserInfo}
+    <div style={{display: 'flex', width: '25%'}}>
+      <div style={{backgroundColor: '#F8F8F8', width: '20%'}}></div>
+      <div style={{overflow: 'auto', width: '80%'}}>{filteredUserInfo}</div>
     </div>
   )
 }

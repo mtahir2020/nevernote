@@ -24,7 +24,7 @@ form input {
   flex-direction: column;
   margin: auto;
   width: 100%;
-  /* border: 1px solid white; */
+  /* border: 1px solid pink; */
 }
 
 .search-add-container {

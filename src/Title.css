@@ -1,5 +1,18 @@
 .title-active {
   color: white;
   background-color: darkgrey;
-  
+
+}
+
+.note-actions:hover {
+  /* background-color: #F8F8F8; */
+  /* color: #28A955; */
+}
+
+.note-action {
+  margin-left: 12px;
+}
+
+.note-action:hover {
+  color: black;
 }
