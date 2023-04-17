@@ -7,3 +7,20 @@
   border: 2px solid #ECECEC;
   background-color: pink;
 }
+
+.add-note-icon {
+  border: 1px solid #4DC674;
+  background-color: white;
+  color: #4DC674;
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.add-note-icon:hover {
+  color: white;
+  background-color: #28A955;
+}
+
+/* .icon-parent:hover .add-note-icon {
+
+} */

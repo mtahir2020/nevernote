@@ -5,12 +5,13 @@ button {
   color: white;
   /* padding: 0.5rem 1rem; */
   cursor: pointer;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   border-radius: 3px;
   font-size: 14px;
   font-weight: 400;
   line-height: 27px;
   cursor: pointer;
+  height: 2.5rem;
 }
 
 button:hover,
@@ -26,4 +27,16 @@ button:focus {
 button remove {
   background-color: red;
   width: 50%;
+}
+
+.create-new-button {
+  color: white;
+  border: 1px solid #F0A00C;
+  background-color: #F0A00C;
+}
+
+.create-new-button:hover {
+  color: white;
+  background-color: rgb(223, 144, 9);
+  border: 1px solid rgb(223, 144, 9);
 }

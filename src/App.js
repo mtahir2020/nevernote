@@ -14,6 +14,7 @@ function App() {
 
   const [query, setQuery] = useState('')
   const [selectedNoteId, setSelectedNoteId] = useState()
+  const [timeStamp, setTimeStamp] = useState()
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(userInfo))
@@ -31,16 +32,18 @@ function App() {
       return [
         {
           id: userInfo.length > 0 ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
+          timestamp: timeStamp,
           title: info.body.split('\n')[0],
           body: info.body
         },
         ...oldUserInfo
       ]
     })
+    // console.log(timeStamp);
   }
 
   const removePerson = (user) => {
-    console.log(user);
+    // console.log(user);
     setUserInfo((oldFilteredUsers) => {
       const updatedUsers = oldFilteredUsers.filter((person) => {
         return person.id !== user.id
@@ -49,7 +52,6 @@ function App() {
     })
     setSelectedNoteId(undefined)
   }
-  // console.log(selectedNoteId);
 
   const onModification = (mod, newInput) => {
     // Updating the notes list so a freshly modified note goes to the top of the list
@@ -59,7 +61,7 @@ function App() {
       for (let i = 0; i < oldNotes.length ; i++) {
         const oldNote = oldNotes[i]
         if (oldNote.id === mod.id) {
-          updatedArray.unshift({...mod, title: newInput.split('\n')[0], body: newInput})
+          updatedArray.unshift({...mod, timestamp: timeStamp, title: newInput.split('\n')[0], body: newInput})
         } else {
           updatedArray.push(oldNote)
         }
@@ -88,6 +90,9 @@ function App() {
   }, [selectedNoteId, userInfo]/*, userInfo]*/)
 
 
+  const timeStamper = (stamp) => {
+    setTimeStamp(stamp)
+  }
 
   return (
     <div className='main'>
@@ -96,11 +101,12 @@ function App() {
         { userInfo.length < 1 ? <EmptyNotes /> :
         <TitlesList resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
         }
-        <MainNote resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
-        {/* <button type='button' onClick={resetMemo}>Reset</button> */}
-     </div>
+        <MainNote getTimeStamp={timeStamper} resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
+      </div>
     </div>
   );
 }
 
 export default App;
+
+// WHEN TIMESTAMP STATE CHANGES, FIND THE OBJECT AND UPDATE THE TIMESTAMP
