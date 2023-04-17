@@ -13,7 +13,8 @@ const Title = ({ onNoteClick, onHandleClick, id, timestamp, title, body }) => {
     onHandleClick({
       id: id,
       title: title,
-      body: body
+      body: body,
+      timestamp: timestamp
     })
     // resetMemo()
   }
@@ -22,7 +23,8 @@ const Title = ({ onNoteClick, onHandleClick, id, timestamp, title, body }) => {
     onNoteClick({
       id: id,
       title: title,
-      body: body
+      body: body,
+      timestamp: timestamp
     })
   }
 
