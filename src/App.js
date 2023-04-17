@@ -4,7 +4,7 @@ import TitlesList from './TitlesList';
 import Header from './Header'
 import MainNote from './MainNote';
 import EmptyNotes from './EmptyNotes'
-
+import { format } from 'date-fns'
 
 function App() {
 
@@ -14,7 +14,6 @@ function App() {
 
   const [query, setQuery] = useState('')
   const [selectedNoteId, setSelectedNoteId] = useState()
-  const [timeStamp, setTimeStamp] = useState()
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(userInfo))
@@ -25,6 +24,8 @@ function App() {
     return item['title'].toLowerCase().indexOf(query.toLowerCase()) !== -1
   })
 
+  const formattedDate = format(new Date(Date.now()), 'dd/MM/yy, HH:mm b')
+
   // When adding a new item to top of the list, the id will break if if it's trying to take the last item from the array
   const finalUserInfo = (info) => {
     // console.log(info.body.split('\n')[0].substring(0, 20))
@@ -32,14 +33,14 @@ function App() {
       return [
         {
           id: userInfo.length > 0 ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
-          timestamp: timeStamp,
+          // timestamp: timeStamp,
+          timestamp: formattedDate,
           title: info.body.split('\n')[0],
           body: info.body
         },
         ...oldUserInfo
       ]
     })
-    // console.log(timeStamp);
   }
 
   const removePerson = (user) => {
@@ -53,6 +54,8 @@ function App() {
     setSelectedNoteId(undefined)
   }
 
+
+
   const onModification = (mod, newInput) => {
     // Updating the notes list so a freshly modified note goes to the top of the list
     // If the id doesn't match, it simply gets pushed to the end part of the array
@@ -61,7 +64,8 @@ function App() {
       for (let i = 0; i < oldNotes.length ; i++) {
         const oldNote = oldNotes[i]
         if (oldNote.id === mod.id) {
-          updatedArray.unshift({...mod, timestamp: timeStamp, title: newInput.split('\n')[0], body: newInput})
+          // updatedArray.unshift({...mod, timestamp: timeStamp, title: newInput.split('\n')[0], body: newInput})
+          updatedArray.unshift({...mod, timestamp: formattedDate, title: newInput.split('\n')[0], body: newInput})
         } else {
           updatedArray.push(oldNote)
         }
@@ -90,9 +94,9 @@ function App() {
   }, [selectedNoteId, userInfo]/*, userInfo]*/)
 
 
-  const timeStamper = (stamp) => {
-    setTimeStamp(stamp)
-  }
+  // const timeStamper = (stamp) => {
+  //   setTimeStamp(stamp)
+  // }
 
   return (
     <div className='main'>
@@ -101,7 +105,7 @@ function App() {
         { userInfo.length < 1 ? <EmptyNotes /> :
         <TitlesList resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
         }
-        <MainNote getTimeStamp={timeStamper} resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
+        <MainNote /*getTimeStamp={timeStamper}*/ resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
       </div>
     </div>
   );
