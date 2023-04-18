@@ -11,10 +11,13 @@ const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, fin
   const [modifiable, setModifiable] = useState(false)
 
   // when selectedNote changes (held in App.js), if selectedNote exists, make that the 'note' held in state
+  // when selectedNote changes, the state of modifiable is lost and resets to false
   useEffect(() => {
     if (selectedNote !== undefined /*&& note !== selectedNote*/) {
+      setModifiable(false)
       setNote(selectedNote)
-    } else {
+    }
+    else {
       setNote({id: '', title: '', body: '', timestamp: ''})
     }
   }, [selectedNote])
@@ -23,16 +26,17 @@ const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, fin
 
   const mainNoteChange = (e) => {
 
-    // ONLY the post that is being acted on should be modifiable
-    // note.modifiable? (object)
     setModifiable(true)
     let newInput = e.target.value;
     // console.log(newInput.split('\n')[0].length)
+
     if (newInput.split('\n')[0].length < 25) {
       setNote((oldNote) => {
         return {...oldNote, body: newInput }
       })
-    } else {
+    }
+
+    else {
       alert('Title should be 25 characters max')
     }
  }
@@ -64,6 +68,7 @@ const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, fin
     <div className='main-note-area'>
       <div style={{display: 'flex', width: '100%', padding: '0 0.5rem', alignItems: 'center', minHeight: '3rem', justifyContent: 'space-between'}}>
         <div>
+          {/* only show updatebutton if there was a change */}
           {(modifiable && selectedNote && note.body !== '') && <UpdateButton />}
           {(selectedNote && note.body !== '') && <FontAwesomeIcon className="note-action-main" size="2xl" title="DELETE POST" onClick={removePost} icon={icon({name: 'trash'})} />}
           {(!selectedNote && note.body !== '') && <button type='button' onClick={onSave}>Save note</button>}
