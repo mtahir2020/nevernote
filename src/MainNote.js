@@ -2,27 +2,39 @@ import React, { useState, useEffect } from 'react'
 import './MainNote.css'
 import styles from './Button.module.css'
 import { format } from 'date-fns'
+import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const MainNote = ({ selectedNote, resetMemo, onModification, finalUserInfo }) => {
+const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, finalUserInfo }) => {
 
   const [note, setNote] = useState({id: '', title: '', body: '', timestamp: ''})
   const [modifiable, setModifiable] = useState(false)
 
   // when selectedNote changes (held in App.js), if selectedNote exists, make that the 'note' held in state
   useEffect(() => {
-    if (selectedNote !== undefined) {
+    if (selectedNote !== undefined /*&& note !== selectedNote*/) {
       setNote(selectedNote)
     } else {
       setNote({id: '', title: '', body: '', timestamp: ''})
     }
   }, [selectedNote])
 
+
+
   const mainNoteChange = (e) => {
+
+    // ONLY the post that is being acted on should be modifiable
+    // note.modifiable? (object)
     setModifiable(true)
     let newInput = e.target.value;
-    setNote((oldNote) => {
-      return {...oldNote, body: newInput }
-    })
+    // console.log(newInput.split('\n')[0].length)
+    if (newInput.split('\n')[0].length < 25) {
+      setNote((oldNote) => {
+        return {...oldNote, body: newInput }
+      })
+    } else {
+      alert('Title should be 25 characters max')
+    }
  }
 
 //  on saving, if selectedNote exists, modify 'note', otherwise create it
@@ -43,16 +55,25 @@ const MainNote = ({ selectedNote, resetMemo, onModification, finalUserInfo }) =>
     )
   }
 
+  const removePost = () => {
+    console.log('clicked')
+    onRemovePerson(note)
+  }
+
   return (
     <div className='main-note-area'>
       <div style={{display: 'flex', width: '100%', padding: '0 0.5rem', alignItems: 'center', minHeight: '3rem', justifyContent: 'space-between'}}>
-        {(modifiable && selectedNote) && <UpdateButton />}
-        {(!selectedNote && note.body !== '') && <button type='button' onClick={onSave}>Save note</button>}
+        <div>
+          {(modifiable && selectedNote && note.body !== '') && <UpdateButton />}
+          {(selectedNote && note.body !== '') && <FontAwesomeIcon className="note-action-main" size="2xl" title="DELETE POST" onClick={removePost} icon={icon({name: 'trash'})} />}
+          {(!selectedNote && note.body !== '') && <button type='button' onClick={onSave}>Save note</button>}
+        </div>
         <p style={{color: '#757575'}}>{format(new Date(Date.now()), 'EEE do MMMM yyyy')}</p>
         {(selectedNote && note.body !== '') && <button className={styles['create-new-button']} type='button' onClick={wipeNote}>New note</button>}
       </div>
+      {/* <textarea className='textarea-note' onChange={mainNoteChange} */}
       <textarea className='textarea-note' onChange={mainNoteChange}
-      placeholder="Title goes here...&#10;Type your note here.." value={note.body}></textarea>
+      placeholder='Start typing...&#10;Keep typing your note here..' value={note.body}></textarea>
     </div>
   )
 }

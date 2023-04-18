@@ -1,12 +1,13 @@
+.title {
+  height: 100px;
+  border-bottom: 1px solid #ECECEC;
+}
+
 .title:hover {
   background-color: #48BC6C;
   color: white;
 }
 
-.active-note {
-  border: 2px solid #ECECEC;
-  background-color: pink;
-}
 
 .add-note-icon {
   border: 1px solid #4DC674;
@@ -21,6 +22,25 @@
   background-color: #28A955;
 }
 
-/* .icon-parent:hover .add-note-icon {
+.left-panel {
+  display: flex;
+  width: 20%;
+}
 
-} */
+@media screen and (max-width: 2000px) {
+  .left-panel {
+    width: 35%;
+  }
+
+  .title {
+    min-height: 130px;
+  }
+}
+
+.title-panel {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

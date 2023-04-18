@@ -16,7 +16,6 @@ const Title = ({ onNoteClick, onHandleClick, id, timestamp, title, body }) => {
       body: body,
       timestamp: timestamp
     })
-    // resetMemo()
   }
 
   const getNoteDetails = (e) => {
@@ -30,13 +29,13 @@ const Title = ({ onNoteClick, onHandleClick, id, timestamp, title, body }) => {
 
 
   return (
-    <div style={ {height: 100, borderBottom: '1px solid #ECECEC'} } className={`title`} onClick={getNoteDetails}>
+    <div className={`title`} onClick={getNoteDetails}>
       <div style={{display: 'flex', height: '60%', padding: '8px 4px', width: '100%', flexDirection: 'column'}}>
-        <p style={{fontWeight: 500, padding: '0 8px', margin: 'unset'}}>{title}</p>
+        <p style={{fontWeight: 500, fontSize: '1.15rem', padding: '0 8px', margin: 'unset'}}>{title}</p>
         <p style={{fontSize: '0.75rem', color: '#c2c2c4', padding: '0 8px'}}>{timestamp}</p>
       </div>
       <div className="note-actions" style={{display: 'flex', height: '40%', justifyContent: 'flex-start', alignItems: 'center'}}>
-        <FontAwesomeIcon className="note-action" title="DELETE POST" onClick={removeUser} icon={icon({name: 'trash'})} />
+        <FontAwesomeIcon className="note-action" title="DELETE POST" onClick={removeUser} size="lg" icon={icon({name: 'trash'})} />
       </div>
     </div>
   )
