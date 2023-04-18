@@ -24,7 +24,10 @@ function App() {
     return item['title'].toLowerCase().indexOf(query.toLowerCase()) !== -1
   })
 
-  const formattedDate = format(new Date(Date.now()), 'dd/MM/yy, HH:mm b')
+  const formattedDate = format(new Date(Date.now()), 'dd/MM/yy, K:mm b')
+
+  // const shortenedTitle = bigString => bigString.split('\n')[0].substring(0, 28) + '...'
+  const longerTitle = bigString => bigString.split('\n')[0];
 
   // When adding a new item to top of the list, the id will break if if it's trying to take the last item from the array
   const finalUserInfo = (info) => {
@@ -35,7 +38,8 @@ function App() {
           id: userInfo.length > 0 ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
           // timestamp: timeStamp,
           timestamp: formattedDate,
-          title: info.body.split('\n')[0],
+          // title: info.body.split('\n')[0](0, 20),
+          title: longerTitle(info.body),
           body: info.body
         },
         ...oldUserInfo
@@ -65,7 +69,7 @@ function App() {
         const oldNote = oldNotes[i]
         if (oldNote.id === mod.id) {
           // updatedArray.unshift({...mod, timestamp: timeStamp, title: newInput.split('\n')[0], body: newInput})
-          updatedArray.unshift({...mod, timestamp: formattedDate, title: newInput.split('\n')[0], body: newInput})
+          updatedArray.unshift({...mod, timestamp: formattedDate, title: longerTitle(newInput), body: newInput})
         } else {
           updatedArray.push(oldNote)
         }
@@ -94,10 +98,6 @@ function App() {
   }, [selectedNoteId, userInfo]/*, userInfo]*/)
 
 
-  // const timeStamper = (stamp) => {
-  //   setTimeStamp(stamp)
-  // }
-
   return (
     <div className='main'>
       <Header query={query} setQuery={setQuery}/>
@@ -105,7 +105,7 @@ function App() {
         { userInfo.length < 1 ? <EmptyNotes /> :
         <TitlesList resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
         }
-        <MainNote /*getTimeStamp={timeStamper}*/ resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
+        <MainNote resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
       </div>
     </div>
   );

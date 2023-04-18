@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './TitleList.css'
 
-const TitlesList = ({ selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
+const TitlesList = ({ resetMemo, selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
 
   const onHandleClick = (user) => {
     // console.log(user);
@@ -21,7 +21,9 @@ const TitlesList = ({ selectedNoteId, onRemovePerson, onModification, noteClicke
     noteClicked(user)
   }
 
-  // console.log(timeStamp);
+  const wipeNote = () => {
+    resetMemo()
+  }
 
   const filteredUserInfo = filteredUsers.map((user) => {
     return <Title
@@ -38,11 +40,11 @@ const TitlesList = ({ selectedNoteId, onRemovePerson, onModification, noteClicke
 
 
   return (
-    <div style={{display: 'flex', width: '25%'}}>
+    <div className="left-panel">
       <div style={{backgroundColor: '#F8F8F8', width: '20%', display: 'flex', justifyContent: 'center'}}>
-        <div style={{height: 100, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div className='title-panel'>
           <div className="icon-parent" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: 42, width: 42}}>
-            <FontAwesomeIcon className='add-note-icon' title="CREATE NEW POST" icon={faPlus} size="xl" />
+            <FontAwesomeIcon className='add-note-icon' onClick={wipeNote} title="CREATE NEW POST" icon={faPlus} size="xl" />
           </div>
         </div>
       </div>
