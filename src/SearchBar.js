@@ -12,13 +12,15 @@ const SearchBar = ({ query, setQuery }) => {
   }
 
   // do the onClick on fontAwesome element
-   const resetSearch = () => {
+  const resetSearch = () => {
     setQuery('')
   }
 
   return (
     <div className='search-container'>
-      {query !== '' && <div onClick={resetSearch} className='clear-icon'><FontAwesomeIcon icon={faCircleXmark} size="xl"/></div>}
+      {query !== '' && <div onClick={resetSearch} className='clear-icon'>
+        <FontAwesomeIcon icon={faCircleXmark} size="xl"/>
+      </div>}
       <input id='search' className="input" placeholder="Search title here" value={query} type="text" onChange={filterBySearch}/>
     </div>
   )

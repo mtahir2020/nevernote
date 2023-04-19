@@ -1,10 +1,11 @@
 import React from 'react';
 import Title from './Title.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import './TitleList.css'
+import Button from './Button.js'
 
-const TitlesList = ({ resetMemo, selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
+const TitlesList = ({ setQuery, resetMemo, selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
 
   const onHandleClick = (user) => {
     // console.log(user);
@@ -23,6 +24,10 @@ const TitlesList = ({ resetMemo, selectedNoteId, onRemovePerson, onModification,
 
   const wipeNote = () => {
     resetMemo()
+  }
+
+  const clearSearch = () => {
+    setQuery('')
   }
 
   const filteredUserInfo = filteredUsers.map((user) => {
@@ -48,7 +53,14 @@ const TitlesList = ({ resetMemo, selectedNoteId, onRemovePerson, onModification,
           </div>
         </div>
       </div>
-      <div style={{overflow: 'auto', width: '80%'}}>{filteredUserInfo}</div>
+      <div style={{overflow: 'auto', width: '80%'}}>
+        {filteredUsers.length > 0 ? filteredUserInfo : <div style={{height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <h2 style={{textAlign: 'center'}}>Search yielded no results..</h2>
+          <div onClick={clearSearch} className='clear-search-list'>
+            <Button > Clear Search</Button>
+          </div>
+        </div>}
+      </div>
     </div>
   )
 }

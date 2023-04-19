@@ -18,6 +18,12 @@
   /* color: green; */
 }
 
+.textarea-note:focus {
+    outline: none !important;
+    border:1px solid #28A955;
+    box-shadow: 0 0 2px #719ECE;
+}
+
 .textarea-note:first-line {
   font-weight: bold;
   color: #28a955ba;
