@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.clear-icon:hover {
+  color: grey;
+}
+
 .search-container input {
   font: inherit;
   display: block;
