@@ -6,7 +6,7 @@ import MainNote from './MainNote';
 import EmptyNotes from './EmptyNotes'
 import ErrorModal from './UI/ErrorModal'
 import { format } from 'date-fns'
-import TitleError from './UI/TitleError';
+
 
 function App() {
 
