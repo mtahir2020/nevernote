@@ -39,6 +39,11 @@
   color: #28a955ba;
 }
 
+.react-confirm-alert {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 2000px) {
   .main-note-area {
     width: 65%;
