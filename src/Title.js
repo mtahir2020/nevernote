@@ -6,17 +6,8 @@ import './Title.css'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Title = ({ showDeleteModal, onNoteClick, /*onHandleClick,*/ id, timestamp, title, body }) => {
+const Title = ({ showDeleteModal, onNoteClick, id, timestamp, title, body }) => {
 
-  // const removeUser = (e) => {
-  //   // console.log(e.currentTarget);
-  //   onHandleClick({
-  //     id: id,
-  //     title: title,
-  //     body: body,
-  //     timestamp: timestamp
-  //   })
-  // }
 
   const getNoteDetails = (e) => {
     onNoteClick({

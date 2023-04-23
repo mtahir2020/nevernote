@@ -27,7 +27,7 @@ function App() {
     return item['title'].toLowerCase().indexOf(query.toLowerCase()) !== -1
   })
 
-  const formattedDate = format(new Date(Date.now()), 'dd/MM/yy, K:mm b')
+  const formattedDate = format(new Date(Date.now()), 'dd/MM/yy, kk:mm (b)')
 
   const showDeleteModal = () => {
     // console.log(hello);
