@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from './Title.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './TitleList.css'
 import Button from './Button.js'
 

@@ -1,8 +1,8 @@
 import React from "react";
 import classes from './ErrorModal.module.css'
 import styles from '../Button.module.css'
-import Button from "../Button";
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+// import Button from "../Button";
+// import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
