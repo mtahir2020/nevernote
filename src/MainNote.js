@@ -5,10 +5,11 @@ import { format } from 'date-fns'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, finalUserInfo }) => {
+const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, finalUserInfo }) => {
 
   const [note, setNote] = useState({id: '', title: '', body: '', timestamp: ''})
   const [modifiable, setModifiable] = useState(false)
+  // const [timerId, setTimerId] = useState(null)
 
   // when selectedNote changes (held in App.js), if selectedNote exists, make that the 'note' held in state
   // when selectedNote changes, the state of modifiable is lost and resets to false
@@ -28,8 +29,6 @@ const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, fin
 
     setModifiable(true)
     let newInput = e.target.value;
-    // console.log(newInput.split('\n')[0].length)
-
     if (newInput.split('\n')[0].length < 25) {
       setNote((oldNote) => {
         return {...oldNote, body: newInput }
@@ -60,8 +59,9 @@ const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, fin
   }
 
   const removePost = () => {
-    console.log('clicked')
-    onRemovePerson(note)
+    // console.log('clicked')
+    showDeleteModal()
+    // onRemovePerson(note)
   }
 
   return (
@@ -76,7 +76,6 @@ const MainNote = ({ onRemovePerson, selectedNote, resetMemo, onModification, fin
         <p style={{color: '#757575'}}>{format(new Date(Date.now()), 'EEE do MMMM yyyy')}</p>
         {(selectedNote && note.body !== '') && <button className={styles['create-new-button']} type='button' onClick={wipeNote}>New note</button>}
       </div>
-      {/* <textarea className='textarea-note' onChange={mainNoteChange} */}
       <textarea className='textarea-note' onChange={mainNoteChange}
       placeholder='Start typing...&#10;Keep typing your note here..' value={note.body}></textarea>
     </div>

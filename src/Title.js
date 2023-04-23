@@ -6,17 +6,17 @@ import './Title.css'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Title = ({ onNoteClick, onHandleClick, id, timestamp, title, body }) => {
+const Title = ({ showDeleteModal, onNoteClick, /*onHandleClick,*/ id, timestamp, title, body }) => {
 
-  const removeUser = (e) => {
-    // console.log(e.currentTarget);
-    onHandleClick({
-      id: id,
-      title: title,
-      body: body,
-      timestamp: timestamp
-    })
-  }
+  // const removeUser = (e) => {
+  //   // console.log(e.currentTarget);
+  //   onHandleClick({
+  //     id: id,
+  //     title: title,
+  //     body: body,
+  //     timestamp: timestamp
+  //   })
+  // }
 
   const getNoteDetails = (e) => {
     onNoteClick({
@@ -35,7 +35,8 @@ const Title = ({ onNoteClick, onHandleClick, id, timestamp, title, body }) => {
         <p style={{fontSize: '0.75rem', color: '#c2c2c4', padding: '0 8px'}}>{timestamp}</p>
       </div>
       <div className="note-actions" style={{display: 'flex', height: '40%', justifyContent: 'flex-start', alignItems: 'center'}}>
-        <FontAwesomeIcon className="note-action" title="DELETE POST" onClick={removeUser} size="lg" icon={icon({name: 'trash'})} />
+        {/* <FontAwesomeIcon className="note-action" title="DELETE POST" onClick={removeUser} size="lg" icon={icon({name: 'trash'})} /> */}
+        <FontAwesomeIcon className="note-action" title="DELETE POST" onClick={showDeleteModal} size="lg" icon={icon({name: 'trash'})} />
       </div>
     </div>
   )

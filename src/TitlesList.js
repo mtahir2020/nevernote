@@ -5,7 +5,7 @@ import { faPlus, faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import './TitleList.css'
 import Button from './Button.js'
 
-const TitlesList = ({ setQuery, resetMemo, selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
+const TitlesList = ({ showDeleteModal, setQuery, resetMemo, selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
 
   const onHandleClick = (user) => {
     // console.log(user);
@@ -40,6 +40,7 @@ const TitlesList = ({ setQuery, resetMemo, selectedNoteId, onRemovePerson, onMod
                 onNoteClick={onNoteClick}
                 selectedNoteId={selectedNoteId}
                 timestamp={user.timestamp}
+                showDeleteModal={showDeleteModal}
           />
   })
 
