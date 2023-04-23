@@ -6,6 +6,7 @@ import MainNote from './MainNote';
 import EmptyNotes from './EmptyNotes'
 import ErrorModal from './UI/ErrorModal'
 import { format } from 'date-fns'
+import TitleError from './UI/TitleError';
 
 function App() {
 
@@ -102,16 +103,18 @@ function App() {
 
   return (
     <Fragment >
-      {readyToDelete ? <ErrorModal showDeleteModal={showDeleteModal} noteToDisplay={noteToDisplay} selectedNoteId={selectedNoteId} removePerson={removePerson} title={userInfo.title} /> :
-      <div className='main'>
-        <Header query={query} setQuery={setQuery}/>
-        <div className={styles['card-container']}>
-          { userInfo.length < 1 ? <EmptyNotes /> :
-          <TitlesList showDeleteModal={showDeleteModal} setQuery={setQuery} resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
-          }
-          <MainNote showDeleteModal={showDeleteModal} resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
+      {
+        readyToDelete ? <ErrorModal showDeleteModal={showDeleteModal} noteToDisplay={noteToDisplay} selectedNoteId={selectedNoteId} removePerson={removePerson} title={userInfo.title} /> :
+        <div className='main'>
+          <Header query={query} setQuery={setQuery}/>
+          <div className={styles['card-container']}>
+            { userInfo.length < 1 ? <EmptyNotes /> :
+            <TitlesList showDeleteModal={showDeleteModal} setQuery={setQuery} resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
+            }
+            <MainNote showDeleteModal={showDeleteModal} resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
+          </div>
         </div>
-      </div>}
+      }
     </Fragment>
   );
 }

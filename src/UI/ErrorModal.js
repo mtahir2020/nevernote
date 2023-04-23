@@ -28,7 +28,7 @@ const ErrorModal = ( { showDeleteModal, noteToDisplay, removePerson }) => {
         </div>
         <footer className={classes.actions}>
           <button className={styles['button-cancel']} onClick={() => showDeleteModal()}>Cancel</button>
-          <button style={{padding: '0 4rem', marginLeft: '10px' }}onClick={deleteNote}>Delete</button>
+          <button style={{ marginLeft: '10px' }} onClick={deleteNote}>Delete</button>
         </footer>
       </div>
     </React.Fragment>

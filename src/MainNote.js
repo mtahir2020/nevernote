@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import './MainNote.css'
 import styles from './Button.module.css'
 import { format } from 'date-fns'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+
 const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, finalUserInfo }) => {
 
   const [note, setNote] = useState({id: '', title: '', body: '', timestamp: ''})
   const [modifiable, setModifiable] = useState(false)
+
   // const [timerId, setTimerId] = useState(null)
 
   // when selectedNote changes (held in App.js), if selectedNote exists, make that the 'note' held in state
   // when selectedNote changes, the state of modifiable is lost and resets to false
   useEffect(() => {
-    if (selectedNote !== undefined /*&& note !== selectedNote*/) {
+    if (selectedNote !== undefined ) {
       setModifiable(false)
       setNote(selectedNote)
     }
@@ -24,19 +26,19 @@ const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, fi
   }, [selectedNote])
 
 
-
   const mainNoteChange = (e) => {
 
     setModifiable(true)
     let newInput = e.target.value;
-    if (newInput.split('\n')[0].length < 25) {
+    if (newInput.split('\n')[0].length <= 25) {
       setNote((oldNote) => {
         return {...oldNote, body: newInput }
       })
     }
 
     else {
-      alert('Title should be 25 characters max')
+      // handleTitle(true)
+      alert('Title should be max 25 characters. Press enter to start a new line.')
     }
  }
 
@@ -61,10 +63,11 @@ const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, fi
   const removePost = () => {
     // console.log('clicked')
     showDeleteModal()
-    // onRemovePerson(note)
+    // alert('Press enter')
   }
 
   return (
+    <Fragment>
     <div className='main-note-area'>
       <div style={{display: 'flex', width: '100%', padding: '0 0.5rem', alignItems: 'center', minHeight: '3rem', justifyContent: 'space-between'}}>
         <div>
@@ -77,8 +80,10 @@ const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, fi
         {(selectedNote && note.body !== '') && <button className={styles['create-new-button']} type='button' onClick={wipeNote}>New note</button>}
       </div>
       <textarea className='textarea-note' onChange={mainNoteChange}
-      placeholder='Start typing...&#10;Keep typing your note here..' value={note.body}></textarea>
+      placeholder='Title your note&#10;Then press enter and start typing...' value={note.body}></textarea>
     </div>
+    {/* } */}
+    </Fragment>
   )
 }
 

@@ -21,7 +21,7 @@ button:active {
 }
 
 .button-cancel {
-  padding: 0 4rem;
+  /* padding: 0 4rem; */
   margin-right: 10px;
   background-color: #ececec;
   color: #606060;
