@@ -20,6 +20,20 @@ button:active {
   border-color: #28a955;
 }
 
+.button-cancel {
+  padding: 0 4rem;
+  margin-right: 10px;
+  background-color: #ececec;
+  color: #606060;
+  border: 1px solid #D9D9DA;
+}
+
+.button-cancel:hover {
+  background-color: #d9d9d9;
+  border: 1px solid #d1d1d1;
+}
+
+
 button:focus {
   outline: none;
 }
