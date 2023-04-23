@@ -6,7 +6,7 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, finalUserInfo }) => {
+const MainNote = ({ setQuery, showDeleteModal, selectedNote, resetMemo, onModification, finalUserInfo }) => {
 
   const [note, setNote] = useState({id: '', title: '', body: '', timestamp: ''})
   const [modifiable, setModifiable] = useState(false)
@@ -22,6 +22,7 @@ const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, fi
     }
     else {
       setNote({id: '', title: '', body: '', timestamp: ''})
+      // mess with the search list here
     }
   }, [selectedNote])
 
@@ -29,6 +30,7 @@ const MainNote = ({ showDeleteModal, selectedNote, resetMemo, onModification, fi
   const mainNoteChange = (e) => {
 
     setModifiable(true)
+    setQuery('')
     let newInput = e.target.value;
     if (newInput.split('\n')[0].length <= 25) {
       setNote((oldNote) => {
