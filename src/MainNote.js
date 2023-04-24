@@ -76,7 +76,7 @@ const MainNote = ({ setQuery, showDeleteModal, selectedNote, resetMemo, onModifi
           {/* only show updatebutton if there was a change */}
           {(modifiable && selectedNote && note.body !== '') && <UpdateButton />}
           {(selectedNote && note.body !== '') && <FontAwesomeIcon className="note-action-main" size="2xl" title="DELETE POST" onClick={removePost} icon={icon({name: 'trash'})} />}
-          {(!selectedNote && note.body !== '') && <button type='button' onClick={onSave}>Save note</button>}
+          {(!selectedNote && (note && note.body !== '')) && <button type='button' onClick={onSave}>Save note</button>}
         </div>
         <p style={{color: '#757575'}}>{format(new Date(Date.now()), 'EEE do MMMM yyyy')}</p>
         {(selectedNote && note.body !== '') && <button className={styles['create-new-button']} type='button' onClick={wipeNote}>New note</button>}
