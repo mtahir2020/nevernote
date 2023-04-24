@@ -24,7 +24,7 @@ function App() {
 
   // filtered users list
   let filteredUsers = []
-  if (userInfo.length > 0) {
+  if (userInfo) {
       filteredUsers = userInfo.filter((item) => {
       return item['title'].toLowerCase().indexOf(query.toLowerCase()) !== -1
     })
