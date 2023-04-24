@@ -45,7 +45,7 @@ function App() {
     setUserInfo((oldUserInfo) => {
       return [
         {
-          id: userInfo.length > 0 ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
+          id: (userInfo && userInfo.length > 0) ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
           timestamp: formattedDate,
           title: longerTitle(info.body),
           body: info.body
