@@ -23,9 +23,12 @@ function App() {
   }, [userInfo])
 
   // filtered users list
-  const filteredUsers = userInfo.filter((item) => {
-    return item['title'].toLowerCase().indexOf(query.toLowerCase()) !== -1
-  })
+  let filteredUsers = []
+  if (userInfo.length > 0) {
+      filteredUsers = userInfo.filter((item) => {
+      return item['title'].toLowerCase().indexOf(query.toLowerCase()) !== -1
+    })
+  }
 
   const formattedDate = format(new Date(Date.now()), 'dd/MM/yy, kk:mm (b)')
 
