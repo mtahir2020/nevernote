@@ -121,7 +121,7 @@ function App() {
         <div className='main'>
           <Header query={query} setQuery={setQuery}/>
           <div className={styles['card-container']}>
-            { (userInfo && userInfo.length < 1) ? <EmptyNotes /> :
+            { (!userInfo || userInfo.length < 1) ? <EmptyNotes /> :
             <TitlesList showDeleteModal={showDeleteModal} setQuery={setQuery} resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
             }
             <MainNote setQuery={setQuery} showDeleteModal={showDeleteModal} resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
