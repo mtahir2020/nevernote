@@ -98,9 +98,19 @@ function App() {
   // when selectedNoteId changes, it matches that id with the right note from userInfo
 // to find the object with the note id
   const noteToDisplay = useMemo(() => {
-    return userInfo.find((oneNote) => {
-      return selectedNoteId === oneNote.id
-    })
+    if (userInfo) {
+      return userInfo.find((oneNote) => {
+        return selectedNoteId === oneNote.id
+      })
+    } else {
+      return userInfo
+    }
+
+
+
+    // return userInfo.find((oneNote) => {
+    //   return selectedNoteId === oneNote.id
+    // })
   }, [selectedNoteId, userInfo])
 
 
