@@ -82,7 +82,7 @@ const MainNote = ({ setQuery, showDeleteModal, selectedNote, resetMemo, onModifi
         {(selectedNote && note.body !== '') && <button className={styles['create-new-button']} type='button' onClick={wipeNote}>New note</button>}
       </div>
       <textarea className='textarea-note' onChange={mainNoteChange}
-      placeholder='Title your note&#10;Then press enter and start typing...' value={note.body}></textarea>
+      placeholder='Title your note&#10;Then press enter and start typing...' value={note && note.body}></textarea>
     </div>
     {/* } */}
     </Fragment>
