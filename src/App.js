@@ -11,7 +11,7 @@ import { format } from 'date-fns'
 function App() {
 
   const [userInfo, setUserInfo] = useState(
-    () => JSON.parse(localStorage.getItem('notes'))
+    () => JSON.parse(localStorage.getItem('notes')) || []
   )
 
   const [query, setQuery] = useState('')
