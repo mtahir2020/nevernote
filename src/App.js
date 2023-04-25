@@ -23,12 +23,12 @@ function App() {
   }, [userInfo])
 
   // filtered users list
-  let filteredUsers = []
-  if (userInfo) {
-      filteredUsers = userInfo.filter((item) => {
+  // let filteredUsers = []
+  // if (userInfo) {
+      const filteredUsers = userInfo.filter((item) => {
       return item['title'].toLowerCase().indexOf(query.toLowerCase()) !== -1
     })
-  }
+  // }
 
   const formattedDate = format(new Date(Date.now()), 'dd/MM/yy, kk:mm (b)')
 
@@ -45,7 +45,7 @@ function App() {
     setUserInfo((oldUserInfo) => {
       return [
         {
-          id: (userInfo && userInfo.length > 0) ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
+          id: /*(userInfo && */userInfo.length > 0 ? Math.max(...oldUserInfo.map(item => item.id)) + 1 : 1,
           timestamp: formattedDate,
           title: longerTitle(info.body),
           body: info.body
@@ -121,7 +121,7 @@ function App() {
         <div className='main'>
           <Header query={query} setQuery={setQuery}/>
           <div className={styles['card-container']}>
-            { (!userInfo || userInfo.length < 1) ? <EmptyNotes /> :
+            { /*(!userInfo ||*/ userInfo.length < 1 ? <EmptyNotes /> :
             <TitlesList showDeleteModal={showDeleteModal} setQuery={setQuery} resetMemo={resetMemo} selectedNoteId={selectedNoteId} noteClicked={noteClicked} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson}/>
             }
             <MainNote setQuery={setQuery} showDeleteModal={showDeleteModal} resetMemo={resetMemo} selectedNote={noteToDisplay} userData={userInfo} filteredUsers={filteredUsers} onModification={onModification} onRemovePerson={removePerson} finalUserInfo={finalUserInfo} />
