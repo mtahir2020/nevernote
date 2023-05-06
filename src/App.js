@@ -6,7 +6,7 @@ import MainNote from './MainNote';
 import EmptyNotes from './EmptyNotes'
 import ErrorModal from './UI/ErrorModal'
 import { format } from 'date-fns'
-import { useMediaQuery } from 'react-responsive';
+// import { useMediaQuery } from 'react-responsive';
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
   const [selectedNoteId, setSelectedNoteId] = useState()
   const [readyToDelete, setReadyToDelete] = useState(false)
 
-  const isSmallScreen = useMediaQuery( {maxWidth: 600} )
+  // const isSmallScreen = useMediaQuery( {maxWidth: 600} )
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(userInfo))
