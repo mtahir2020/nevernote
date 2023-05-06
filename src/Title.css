@@ -1,12 +1,6 @@
 .title-active {
   color: white;
   background-color: darkgrey;
-
-}
-
-.note-actions:hover {
-  /* background-color: #F8F8F8; */
-  /* color: #28A955; */
 }
 
 .note-action {
@@ -15,4 +9,31 @@
 
 .note-action:hover {
   color: black;
+}
+
+.note-text {
+  display: flex;
+  height: 60%;
+  padding: 8px 4px;
+  width: 100%;
+  flex-direction: column;
+}
+
+.note-title-text {
+  font-weight: 500;
+  font-size: 1.15rem;
+  padding: 0 8px;
+  margin: unset;
+}
+
+.note-timestamp-text {
+  font-size: 0.75rem;
+  color: #c2c2c4;
+  padding: 0 8px;
+}
+
+@media (width: 600px) {
+  .note-title-text {
+    font-weight: bold;
+  }
 }

@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './TitleList.css'
 import Button from './Button.js'
+import { useMediaQuery } from 'react-responsive';
 
 const TitlesList = ({ showDeleteModal, setQuery, resetMemo, selectedNoteId, onRemovePerson, onModification, noteClicked, filteredUsers}) => {
+
+  const isSmallScreen = useMediaQuery( {maxWidth: 600} )
 
   const onHandleClick = (user) => {
     // console.log(user);
@@ -46,23 +49,27 @@ const TitlesList = ({ showDeleteModal, setQuery, resetMemo, selectedNoteId, onRe
 
 
   return (
+
     <div className="left-panel">
-      <div style={{backgroundColor: '#F8F8F8', width: '20%', display: 'flex', justifyContent: 'center'}}>
+        <div className='grey-side-bar' >
+
         <div className='title-panel'>
-          <div className="icon-parent" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: 42, width: 42}}>
+          {!isSmallScreen && <div className="icon-parent" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: 42, width: 42}}>
             <FontAwesomeIcon className='add-note-icon' onClick={wipeNote} title="CREATE NEW POST" icon={faPlus} size="xl" />
-          </div>
+          </div> }
         </div>
       </div>
-      <div style={{overflow: 'auto', width: '80%'}}>
-        {filteredUsers.length > 0 ? filteredUserInfo : <div style={{height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+
+      <div className="notes-panel">
+        {filteredUsers.length > 0 ? filteredUserInfo : <div className='no-search-results'>
           <h2 style={{textAlign: 'center'}}>Search yielded no results..</h2>
           <div onClick={clearSearch} className='clear-search-list'>
-            <Button > Clear Search</Button>
+            <Button> Clear Search</Button>
           </div>
         </div>}
       </div>
     </div>
+
   )
 }
 

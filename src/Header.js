@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './Header.css'
 import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHippo } from '@fortawesome/free-solid-svg-icons'
+import { useMediaQuery } from 'react-responsive';
 
 const Header = ({setQuery, query}) => {
 
@@ -10,18 +11,25 @@ const Header = ({setQuery, query}) => {
     setQuery(quer)
   }
 
-  // const resetSearch = () => {
-  //   setQuery('')
-  // }
+  const isSmallScreen = useMediaQuery( {maxWidth: 600} )
 
   return (
-    < div className='header'>
+  <Fragment>
+
+
+    <div className='header'>
       <h1>
         (N)everNote
-        <FontAwesomeIcon style={{ marginLeft: '1rem', color: '#cbcace'}}icon={faHippo} />
+        <FontAwesomeIcon style={{ marginLeft: '1rem', color: '#cbcace'}} icon={faHippo}/>
       </h1>
-      <SearchBar query={query} setQuery={onQuery}/>
+      { !isSmallScreen && <SearchBar query={query} setQuery={onQuery}/> }
     </div>
+    { isSmallScreen &&
+    <div className='mobile-search-container'>
+      <SearchBar query={query} setQuery={onQuery}/>
+    </div> }
+
+  </Fragment>
   )
 }
 

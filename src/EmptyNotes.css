@@ -1,0 +1,35 @@
+
+.no-notes {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-left-panel {
+  background-color: #F8F8F8;
+  height: 100%;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.empty-notes {
+  width: 80%;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .empty-left-panel {
+    display: none;
+  }
+
+.no-notes {
+  width: 80%;
+  margin: auto;
+}
+
+  .empty-notes {
+    width: 100%;
+  }
+}
