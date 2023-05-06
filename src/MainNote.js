@@ -71,7 +71,7 @@ const MainNote = ({ setQuery, showDeleteModal, selectedNote, resetMemo, onModifi
   return (
     <Fragment>
     <div className='main-note-area'>
-      <div style={{display: 'flex', width: '100%', padding: '0 0.5rem', alignItems: 'center', minHeight: '3rem', justifyContent: 'space-between'}}>
+      <div className='note-buttons-date' style={{display: 'flex', width: '100%', padding: '0 0.5rem', alignItems: 'center', minHeight: '3rem', justifyContent: 'space-between'}}>
         <div>
           {/* only show updatebutton if there was a change */}
           {(modifiable && selectedNote && note.body !== '') && <UpdateButton />}

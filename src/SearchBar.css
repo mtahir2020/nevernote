@@ -29,3 +29,18 @@
   margin: 1rem auto;
   padding: 0.75rem;
 }
+
+@media (max-width: 600px) {
+  .search-container {
+    width: 90%;
+    margin: auto;
+  }
+
+  .mobile-search-container {
+    width: 100%;
+  }
+
+  .search-container input {
+    padding: 1.25rem 0.75rem;
+  }
+}

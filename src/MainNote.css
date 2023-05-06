@@ -24,6 +24,15 @@
     box-shadow: 0 0 2px #719ECE;
 }
 
+.note-buttons-date {
+  display: flex;
+  width: 100%;
+  padding: 0 0.5rem;
+  align-items: center;
+  min-height: 3rem;
+  justify-content: space-between;
+}
+
 .textarea-note:first-line {
   font-weight: bold;
   color: #28a955ba;
@@ -47,5 +56,17 @@
 @media screen and (max-width: 2000px) {
   .main-note-area {
     width: 65%;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-note-area {
+    margin: auto;
+    width: 90%;
+    margin-top: 2rem;
+  }
+
+  .note-buttons-date {
+    margin-bottom: 8px;
   }
 }
