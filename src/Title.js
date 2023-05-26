@@ -23,7 +23,7 @@ const Title = ({ showDeleteModal, onNoteClick, id, timestamp, title, body }) => 
     <div className='title' onClick={getNoteDetails}>
       <div className='note-text' >
         <p className='note-title-text' >{title}</p>
-        <p class='note-timestamp-text' >{timestamp}</p>
+        <p className='note-timestamp-text' >{timestamp}</p>
       </div>
       <div className="note-actions" style={{display: 'flex', height: '40%', justifyContent: 'flex-start', alignItems: 'center'}}>
         {/* <FontAwesomeIcon className="note-action" title="DELETE POST" onClick={removeUser} size="lg" icon={icon({name: 'trash'})} /> */}
