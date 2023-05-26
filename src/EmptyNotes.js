@@ -7,7 +7,7 @@ const EmptyNotes = ( ) => {
 
 
   return (
-    <div class="no-notes" /*style={{width: '35%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}*/>
+    <div className="no-notes" /*style={{width: '35%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}*/>
       <div className='empty-left-panel' /*style={{backgroundColor: '#F8F8F8', height: '100%', width: '20%', display: 'flex', justifyContent: 'center'}}*/>
       </div>
       <div className='empty-notes' /*style={{width: '80%', textAlign: 'center'}}*/>
